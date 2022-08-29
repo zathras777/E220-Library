@@ -99,11 +99,6 @@ bool e220Module::setModuleConfiguration(bool save) {
     ModuleStatus res = setMode(E220_MODE_PROGRAM);
     RETURN_AND_SET(res)
 
-//    if (! this->setMode(E220_MODE_PROGRAM)) {
-//        _lastError = E220_MODE_ERROR;
-//        return false;
-//    }
-
     uint8_t cfgData[9] = { save ? CMD_CFG_SAVE : CMD_CFG_TEMP, REG_CFG, 6};
     uint8_t *newCfg = buildConfigurationBytes();
     memcpy(&cfgData[3], newCfg, 6);
@@ -249,6 +244,9 @@ bool e220Module::sendFixedBroadcastMessage(const uint8_t chan, const uint8_t *ms
 
 ModuleStatus e220Module::sendCommand(uint8_t cmd, uint8_t addr, size_t length) {
 	uint8_t CMD[3] = {cmd, addr, length};
+#ifdef E220_DEBUG_2
+    printHexBytes("sendCommand", CMD, 3);
+#endif /* E220_DEBUG_2 */
 	size_t size = this->stream->write(CMD, 3);
 	managedDelay(50);
     return size != 3 ? E220_DATA_SIZE_ERROR : E220_SUCCESS;

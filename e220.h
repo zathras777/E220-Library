@@ -236,7 +236,7 @@ class e220Module {
          * @return true 
          * @return false 
          */
-        bool setFixed(bool onoff) { Serial.print("setFixed, _dirty = "); Serial.println(_dirty); _dirty |= (onoff != _fixedTx); _fixedTx = onoff; Serial.print("setFixed, _dirty = "); Serial.println(_dirty); };
+        bool setFixed(bool onoff) { _dirty |= (onoff != _fixedTx); _fixedTx = onoff; };
         /**
          * @brief Is the present configuration set for fixed transmission?
          * 

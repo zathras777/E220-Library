@@ -391,7 +391,7 @@ void ModuleInfo::printDetails() {
     Serial.println();
 }
 
-#ifdef E220_DEBUG
+#ifdef E220_DEBUG_2
 void e220Module::printHexBytes(String prefix, const uint8_t *bytes, const size_t bytesLen) {
     Serial.print(prefix);
     Serial.print(": ");
